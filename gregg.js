@@ -8,6 +8,8 @@ var T = new Twit(config);
 // An empty array for a queue of tweets
 var queue = [];
 
+var reactions = ['I feel threatened', 'I saw something, I said something', 'Do something!'];
+
 // Every so often pick a random one from the queue and tweet it once per hour
 setInterval(tweetIt, 20 * 1000);
 
@@ -34,9 +36,10 @@ function tweetIt() {
 
     T.post('statuses/retweet', { id: tweetID }, retweeted);
 
-    // also tweet something
+	//here's where I try and create the reply
+
     // var at = "@imd244";
-    T.post('statuses/update', { status:'hi'});
+    // T.post('statuses/update', { status:at, in_reply_to_status_id:tweetID}, reactionSwitch);
     
 
     function retweeted(err, data, response) {
@@ -49,6 +52,14 @@ function tweetIt() {
 
 } else {
 	console.log('No tweets to retweet.');
+}
+	//function reactionSwitch(err) {
+		//if (err){ 
+			//console.log( "You messed up")
+		//} else{
+	 //var react = [Math.floor(Math.random() * reactions.length)]; 
+
+	}
 }
 }
 
