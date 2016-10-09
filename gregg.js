@@ -17,6 +17,7 @@ var phrase = 'threat,danger';
 var stream = T.stream('statuses/filter', { track: phrase });
 stream.on('tweet', gotTweet);
 
+
 //This function searches relevant tweets and retweets them
 function tweetIt() {
 	console.log('I have ' + queue.length + ' tweets in the queue.');
@@ -32,9 +33,10 @@ function tweetIt() {
     queue = [];
 
     T.post('statuses/retweet', { id: tweetID }, retweeted);
-    T.post('statuses/update', {status: '@imd244', in_reply_to_status_id: tweetID});
 
     // also tweet something
+    // var at = "@imd244";
+    T.post('statuses/update', { status:'hi'});
     
 
     function retweeted(err, data, response) {
