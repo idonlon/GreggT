@@ -34,21 +34,23 @@ function tweetIt() {
     // Start over again?
     queue = [];
 
-    T.post('statuses/retweet', { id: tweetID }, retweeted);
+  //retweet random tweet
+  // T.post('statuses/retweet', { status: at + '' + reactions[react], id:tweetID}, reactionSwitch);
 
 	//here's where I try and create the reply
-
   var at = "@imd244";
-  var react = [Math.floor(Math.random() * reactions.length)]; 
+  var react = Math.floor(Math.random() * reactions.length);
 
-  T.post('statuses/update', { status: at + react, in_reply_to_status_id:tweetID}, reactionSwitch);
+  //I'm trying to use this as a way to reply to the retweet and send it to @mta
+  T.post('statuses/retweet', {id:tweetID}, retweeted);
+  T.post('statuses/update', { status: at + ' ' + reactions[react], in_reply_to_status_id:tweetID}, reactionSwitch);
 
   function reactionSwitch(err) {
     if (err){ 
       console.log( "You messed up");
     } 
     else {
-      console.log("You reacted with" + ' ' + react);
+      console.log("You reacted with" + ' ' + reactions[react]);
     }
   }
 
@@ -65,12 +67,10 @@ function tweetIt() {
 }
 }
 
-
-
-
 function gotTweet(tweet) {
  console.log('Adding to queue ' + tweet.id_str);
     // Save this tweet for the queue
     queue.push(tweet.id_str);
 
   }
+
