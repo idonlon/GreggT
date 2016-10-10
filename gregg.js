@@ -38,34 +38,39 @@ function tweetIt() {
 
 	//here's where I try and create the reply
 
-    // var at = "@imd244";
-    // T.post('statuses/update', { status:at, in_reply_to_status_id:tweetID}, reactionSwitch);
-    
+  var at = "@imd244";
+  var react = [Math.floor(Math.random() * reactions.length)]; 
 
-    function retweeted(err, data, response) {
-    	if (err) {
-    		console.log("Error: " + err.message);
-    	} else {
-    		console.log('Retweeted: ' + tweetID);
-    	}
+  T.post('statuses/update', { status: at + react, in_reply_to_status_id:tweetID}, reactionSwitch);
+
+  function reactionSwitch(err) {
+    if (err){ 
+      console.log( "You messed up");
+    } 
+    else {
+      console.log("You reacted with" + ' ' + react);
     }
+  }
+
+  function retweeted(err, data, response) {
+   if (err) {
+    console.log("Error: " + err.message);
+  } else {
+    console.log('Retweeted: ' + tweetID);
+  }
+}
 
 } else {
-	console.log('No tweets to retweet.');
+ console.log('No tweets to retweet.');
 }
-	//function reactionSwitch(err) {
-		//if (err){ 
-			//console.log( "You messed up")
-		//} else{
-	 //var react = [Math.floor(Math.random() * reactions.length)]; 
+}
 
-	}
-}
-}
+
+
 
 function gotTweet(tweet) {
-	console.log('Adding to queue ' + tweet.id_str);
+ console.log('Adding to queue ' + tweet.id_str);
     // Save this tweet for the queue
     queue.push(tweet.id_str);
 
-}
+  }
