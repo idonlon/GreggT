@@ -58,5 +58,5 @@ function gotTweet(tweet) {
   console.log('Adding to queue ' + tweet.id_str);
   // Save this tweet for the queue
   queue.push(tweet);
-  console.log(JSON.stringify(tweet.entities.urls, null, 2));
+  console.log(tweet.entities.urls[0].url);
 }
