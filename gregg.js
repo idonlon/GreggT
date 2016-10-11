@@ -27,7 +27,8 @@ function tweetIt() {
     //Store tweets as they are created and choose one randomly
     var index = Math.floor(Math.random() * queue.length);
     //the ID of that random tweet is the one that is randomly pulled from the queue
-    var tweetID = queue[index];
+    var tweetID = queue[index].id_str;
+
     console.log('attempting to retweet: ' + tweetID);
     // Start over again?
     queue = [];
@@ -55,10 +56,7 @@ function tweetIt() {
 
 function gotTweet(tweet) {
   console.log('Adding to queue ' + tweet.id_str);
-    // Save this tweet for the queue
-    queue.push(tweet.id_str);
-        // console.log(tweet.entities.urls[0].url);
-
-    }
-
-
+  // Save this tweet for the queue
+  queue.push(tweet);
+  console.log(tweet.entities.urls[0].url);
+}
